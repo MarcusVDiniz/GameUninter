@@ -25,7 +25,7 @@ class Menu:
 
             for i, option in enumerate(MENU_OPTION):
                 self.menu_text(
-                    20,
+                    21,
                     option,
                     TEXT_WHITE,
                     (WIN_WIDTH / 1.95, start_y + i * spacing)
