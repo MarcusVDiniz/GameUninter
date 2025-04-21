@@ -30,9 +30,7 @@ TEXT_PURPLE = (180, 0, 255)
 TEXT_ORANGE = (255, 140, 0)
 
 #M
-MENU_OPTION = ('P1 VS CPU',
-               '2P VS CPU',
-               'P1 VS P2',
+MENU_OPTION = ('START GAME',
                'SCORE',
                'EXIT')
 #W

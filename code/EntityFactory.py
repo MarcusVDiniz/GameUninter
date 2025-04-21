@@ -1,9 +1,6 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
+from code.Enemy import Enemy
 
 class EntityFactory:
-    def __init__(self):
-        pass
-
-    def get_entity(self, entity_type):
-        pass
+    @staticmethod
+    def create_enemy():
+        return Enemy()
