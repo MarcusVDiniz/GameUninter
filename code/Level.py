@@ -158,6 +158,11 @@ class Level:
                     self.bullets.remove(bullet)
                     enemy.start_dying()
                     self.score += 100
+
+                    # ✅ RECUPERA VIDA A CADA 1000 PONTOS
+                    if self.score % 1000 == 0 and self.player.health < self.player.max_health:
+                        self.player.health += 1
+
                     break
 
         for bullet in self.bullets[:]:

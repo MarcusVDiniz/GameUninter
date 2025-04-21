@@ -11,10 +11,16 @@ class Player:
         self.bullet_sprite = './asset/bulletplayer.png'
         self.health = 5
         self.max_health = 5
+
+        # Controle de dano
         self.invulnerable_timer = 0
-        self.flash_duration = 30  # frames invulnerável
+        self.flash_duration = 30
         self.visible = True
         self.flash_tick = 0
+
+        # Controle de cura
+        self.heal_flash_timer = 0
+        self.heal_flash_duration = 20
 
         self.shoot_sound = pygame.mixer.Sound('./asset/shoot.wav')
 
@@ -43,6 +49,9 @@ class Player:
             self.invulnerable_timer = self.flash_duration
             print(f"Vida restante: {self.health}")
 
+    def heal_flash(self):
+        self.heal_flash_timer = self.heal_flash_duration
+
     def update(self):
         if self.shoot_cooldown > 0:
             self.shoot_cooldown -= 1
@@ -50,15 +59,23 @@ class Player:
         if self.invulnerable_timer > 0:
             self.invulnerable_timer -= 1
             self.flash_tick += 1
-            # alterna visibilidade
             self.visible = (self.flash_tick % 6 < 3)
-            # muda a cor da nave para vermelha temporariamente
             if self.visible:
                 red_image = self.original_image.copy()
                 red_image.fill((255, 0, 0, 128), special_flags=pygame.BLEND_RGBA_MULT)
                 self.image = red_image
             else:
-                self.image = pygame.Surface((0, 0), pygame.SRCALPHA)  # invisível
+                self.image = pygame.Surface((0, 0), pygame.SRCALPHA)
+        elif self.heal_flash_timer > 0:
+            self.heal_flash_timer -= 1
+            self.flash_tick += 1
+            self.visible = (self.flash_tick % 6 < 3)
+            if self.visible:
+                green_image = self.original_image.copy()
+                green_image.fill((0, 255, 0, 128), special_flags=pygame.BLEND_RGBA_MULT)
+                self.image = green_image
+            else:
+                self.image = pygame.Surface((0, 0), pygame.SRCALPHA)
         else:
             self.visible = True
             self.image = self.original_image
